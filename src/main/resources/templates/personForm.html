@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template::header('Person Form')">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row" style="border: 1px solid #4444;
+        padding: 2rem;
+        margin: 1rem;
+        box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+        border-radius: 10px">
+            <div class="col-lg-8 mt-5">
+                <form th:action="@{/post}" method="post" name="person" enctype="multipart/form-data"
+                    th:object="${person}">
+                    <input style="border: none; padding: 5px 10px;outline: none; width: 310px;" type="hidden" placeholder="id" th:field="*{id}" /><br><br>
+                    <div class="form-group row">
+                        <label for="fullname" class="col-sm-4 col-form-label">Full Name</label>
+                        <div class="col-sm-8">
+                            <input style="border: 1px solid #ced4da;padding: .375rem .75rem;outline: none; width: 310px;" type="text" name="fullname" id="fullname" th:field="*{name}">
+                        </div>
+                        <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error
+                        </div>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <label for="job" class="col-sm-4 col-form-label">Job</label>
+                        <div class="col-sm-8">
+                            <select style="border: 1px solid #ced4da;padding: .375rem .75rem;outline: none; width: 310px;" name="job" id="job" th:field="*{job}">
+                                <option value="Developer">Developer</option>
+                                <option value="Banker">Banker</option>
+                                <option value="Taxi Driver">Taxi Driver</option>
+                                <option value="Engineer">Engineer</option>
+                                <option value="Editor">Editor</option>
+                                <option value="Actor">Actor</option>
+                            </select>
+                        </div>
+                        <div class="text-danger" th:if="${#fields.hasErrors('job')}" th:errors="*{job}">Job Error</div>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <label for="job" class="col-sm-4 col-form-label">Gender</label>
+                        <div class="row col-sm-8">
+                            <div class="form-check form-check-inline col-sm-3 mx-2">
+                                <input class="form-check-input" type="radio" name="gender" id="male" th:value="true"
+                                    th:field="*{gender}">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline col-sm-3 mx-2">
+                                <input class="form-check-input" type="radio" name="gender" id="female" th:value="false"
+                                    th:field="*{gender}">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+                     
+                    
+                    </div>
+                    <div class="form-group row mt-3">
+                        <label for="job" class="col-sm-4 col-form-label">Birth Date</label>
+                        <div class="col-sm-8">
+                            <input style="border: 1px solid #ced4da;padding: .375rem .75rem;outline: none; width: 310px;" type="date" id="birthday" name="birthDay" th:field="*{birthDay}">
+                        </div>
+                        <div class="text-danger" th:if="${#fields.hasErrors('birthDay')}" th:errors="*{birthDay}">Birth
+                            Date error</div>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <label class="col-sm-4 col-form-label">Select a photo</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" th:field="*{photo}" />
+                        </div>
+                        <div class="text-danger" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">Upload Error
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3" type="submit">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="template::footer"></footer>
+</body>
+
+</html>
